@@ -63,6 +63,16 @@ namespace LaboratorioRepaso_Andoni_Zamora.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _698627_icon_111_search_512 {
+            get {
+                object obj = ResourceManager.GetObject("698627-icon-111-search-512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Button_12_512 {
             get {
                 object obj = ResourceManager.GetObject("Button_12-512", resourceCulture);
