@@ -14,6 +14,8 @@ namespace LaboratorioRepaso_Andoni_Zamora
     public partial class Form1 : Form
     {
         Dictionary<string, ArchivoMusica> diccionarioMusica = new Dictionary<string, ArchivoMusica>();
+        Dictionary<string, ArchivoMusica> diccionarioPlaylist = new Dictionary<string, ArchivoMusica>();
+        ArchivoMusica[] ordenada;
         ArchivoMusica resultadoDeBusqueda;
         bool nombre = true, duracion = true;
         string ruta;
@@ -34,7 +36,41 @@ namespace LaboratorioRepaso_Andoni_Zamora
 
         private void durasiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ALista();
+            int i, j;
+            ArchivoMusica auxiliar;
+            if (duracion == true)
+            {
+                for (i = 0; i < ordenada.Length - 1; i++)
+                {
+                    for (j = 1; j < ordenada.Length; j++)
+                    {
+                        if (ordenada[j].ordenarDuracion(ordenada[i].duracion) == true)
+                        {
+                            auxiliar = ordenada[j];
+                            ordenada[j] = ordenada[j - 1];
+                            ordenada[j - 1] = auxiliar;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (i = 0; i < ordenada.Length - 1; i++)
+                {
+                    for (j = 1; j < ordenada.Length; j++)
+                    {
+                        if (ordenada[j].ordenarDuracion(ordenada[i].duracion) == false)
+                        {
+                            auxiliar = ordenada[j];
+                            ordenada[j] = ordenada[j - 1];
+                            ordenada[j - 1] = auxiliar;
+                        }
+                    }
+                }
+            }
+            duracion = !duracion;
+            ImprimirLista();
         }
 
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,11 +102,11 @@ namespace LaboratorioRepaso_Andoni_Zamora
             {
                 ArchivoMusica track = new ArchivoMusica();
 
-                track.artista = artistBox.ToString();
-                track.album = albumBox.ToString();
-                track.duracion = durationBox.ToString();
-                track.nombreCancion = nameBox.ToString();
-                track.url = ruta;
+                track.artista = artistBox.Text;
+                track.album = albumBox.Text;
+                track.duracion = durationBox.Text;
+                track.nombreCancion = nameBox.Text;
+                track.url = ruta.ToString();
 
                 songList.Items.Add(track.nombreCancion);
                 diccionarioMusica.Add(track.nombreCancion, track);
@@ -130,6 +166,7 @@ namespace LaboratorioRepaso_Andoni_Zamora
                         file.url = archivo;
 
                         diccionarioMusica.Add(file.nombreCancion, file);
+                        songList.Items.Add(file.nombreCancion);
                     }
                     reproductor.URL = archivos[0];
                 }
@@ -141,8 +178,6 @@ namespace LaboratorioRepaso_Andoni_Zamora
             
         }
 
-        private void songList_SelectedIndexChanged(object sender, EventArgs e) => reproductor.URL = diccionarioMusica[songList.SelectedItem.ToString()].url;
-
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (itemToSearch.Text.Length != 0)
@@ -153,10 +188,12 @@ namespace LaboratorioRepaso_Andoni_Zamora
         {
             try
             {
-                ArchivoMusica file = new ArchivoMusica();
-                file.nombreCancion = item;
-                resultadoDeBusqueda = diccionarioMusica["System.Windows.Forms.TextBox, Text: "+item];
+                resultadoDeBusqueda = diccionarioMusica[item];
                 panelResult.Visible = true;
+                nameResult.Text = resultadoDeBusqueda.nombreCancion;
+                artistResult.Text = resultadoDeBusqueda.artista;
+                albumResult.Text = resultadoDeBusqueda.album;
+                durationResult.Text = resultadoDeBusqueda.duracion;
             }
             catch
             {
@@ -168,11 +205,89 @@ namespace LaboratorioRepaso_Andoni_Zamora
         {
             panelResult.Visible = false;
             resultadoDeBusqueda = null;
+            itemToSearch.Text = "";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             reproductor.URL = resultadoDeBusqueda.url;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelResult.Visible = false;
+                itemToSearch.Text = "";
+                playlistPanel.Visible = true;
+                palylistList.Items.Add(resultadoDeBusqueda.nombreCancion);
+                diccionarioPlaylist.Add(resultadoDeBusqueda.nombreCancion, resultadoDeBusqueda);
+            }
+            catch
+            {
+                MessageBox.Show("Esta canción ya ha sido agregada anteriormente", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
+
+        private void palylistList_SelectedIndexChanged(object sender, EventArgs e) => reproductor.URL = diccionarioPlaylist[palylistList.SelectedItem.ToString()].url;
+        private void songList_SelectedIndexChanged(object sender, EventArgs e) => reproductor.URL = diccionarioMusica[songList.SelectedItem.ToString()].url;
+
+        private void nombreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ALista();
+            int i, j;
+            ArchivoMusica auxiliar;
+            if(nombre == true)
+            {
+                for (i = 0; i < ordenada.Length - 1; i++)
+                {
+                    for (j = 1; j < ordenada.Length; j++)
+                    {
+                        if (ordenada[j].ordenarNombre(ordenada[i].nombreCancion) == true)
+                        {
+                            auxiliar = ordenada[j];
+                            ordenada[j] = ordenada[j - 1];
+                            ordenada[j - 1] = auxiliar;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (i = 0; i < ordenada.Length - 1; i++)
+                {
+                    for (j = 1; j < ordenada.Length; j++)
+                    {
+                        if (ordenada[j].ordenarNombre(ordenada[i].nombreCancion) == false) 
+                        {
+                            auxiliar = ordenada[j];
+                            ordenada[j] = ordenada[j - 1];
+                            ordenada[j - 1] = auxiliar;
+                        }
+                    }
+                }
+            }
+            nombre = !nombre;
+            ImprimirLista();
+        }
+
+        public void ALista()
+        {
+            ordenada = new ArchivoMusica[diccionarioPlaylist.Count];
+            for(int i = 0; i < diccionarioPlaylist.Count; i++)
+            {
+                ordenada[i] = diccionarioPlaylist[palylistList.Items[i].ToString()];
+            }
+        }
+
+        public void ImprimirLista()
+        {
+            palylistList.Items.Clear();
+            for (int i = 0; i < ordenada.Length; i++)
+            {
+                palylistList.Items.Add(ordenada[i].nombreCancion);
+            }
         }
 
         public class ArchivoMusica
@@ -199,7 +314,3 @@ namespace LaboratorioRepaso_Andoni_Zamora
         }
     }
 }
-
-    
-
-
