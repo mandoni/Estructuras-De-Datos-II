@@ -33,12 +33,15 @@
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agragarCarpetaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordenarPorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reproducirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordenarPorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nombreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.durasiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemToSearch = new System.Windows.Forms.ToolStripTextBox();
             this.songName = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -59,15 +62,14 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.playlistPanel = new System.Windows.Forms.Panel();
             this.palylistList = new System.Windows.Forms.ListBox();
-            this.itemToSearch = new System.Windows.Forms.ToolStripTextBox();
             this.volumeButton = new System.Windows.Forms.PictureBox();
             this.stopButton = new System.Windows.Forms.PictureBox();
             this.pauseButton = new System.Windows.Forms.PictureBox();
             this.playButton = new System.Windows.Forms.PictureBox();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelResult = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.albumResult = new System.Windows.Forms.TextBox();
             this.durationResult = new System.Windows.Forms.TextBox();
             this.artistResult = new System.Windows.Forms.TextBox();
@@ -76,9 +78,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -130,6 +130,14 @@
             this.agragarCarpetaToolStripMenuItem.Text = "Agragar carpeta";
             this.agragarCarpetaToolStripMenuItem.Click += new System.EventHandler(this.agragarCarpetaToolStripMenuItem_Click);
             // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Image = global::LaboratorioRepaso_Andoni_Zamora.Properties.Resources.Button_12_512;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
             // ordenarPorToolStripMenuItem
             // 
             this.ordenarPorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -143,13 +151,13 @@
             // reproducirToolStripMenuItem
             // 
             this.reproducirToolStripMenuItem.Name = "reproducirToolStripMenuItem";
-            this.reproducirToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.reproducirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.reproducirToolStripMenuItem.Text = "Reproducir ";
             // 
             // verPlaylistToolStripMenuItem
             // 
             this.verPlaylistToolStripMenuItem.Name = "verPlaylistToolStripMenuItem";
-            this.verPlaylistToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.verPlaylistToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.verPlaylistToolStripMenuItem.Text = "Ver Playlist";
             this.verPlaylistToolStripMenuItem.Click += new System.EventHandler(this.verPlaylistToolStripMenuItem_Click);
             // 
@@ -159,14 +167,15 @@
             this.nombreToolStripMenuItem,
             this.durasiónToolStripMenuItem});
             this.ordenarPorToolStripMenuItem1.Name = "ordenarPorToolStripMenuItem1";
-            this.ordenarPorToolStripMenuItem1.Size = new System.Drawing.Size(151, 22);
+            this.ordenarPorToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.ordenarPorToolStripMenuItem1.Text = "Ordenar por";
             // 
             // nombreToolStripMenuItem
             // 
             this.nombreToolStripMenuItem.Name = "nombreToolStripMenuItem";
-            this.nombreToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.nombreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nombreToolStripMenuItem.Text = "Nombre";
+            this.nombreToolStripMenuItem.Click += new System.EventHandler(this.nombreToolStripMenuItem_Click);
             // 
             // durasiónToolStripMenuItem
             // 
@@ -174,6 +183,19 @@
             this.durasiónToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.durasiónToolStripMenuItem.Text = "Duración";
             this.durasiónToolStripMenuItem.Click += new System.EventHandler(this.durasiónToolStripMenuItem_Click);
+            // 
+            // buscarToolStripMenuItem
+            // 
+            this.buscarToolStripMenuItem.Image = global::LaboratorioRepaso_Andoni_Zamora.Properties.Resources._698627_icon_111_search_512;
+            this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
+            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(39, 23);
+            this.buscarToolStripMenuItem.Text = ":";
+            this.buscarToolStripMenuItem.Click += new System.EventHandler(this.buscarToolStripMenuItem_Click);
+            // 
+            // itemToSearch
+            // 
+            this.itemToSearch.Name = "itemToSearch";
+            this.itemToSearch.Size = new System.Drawing.Size(100, 23);
             // 
             // songName
             // 
@@ -364,17 +386,17 @@
             // 
             // palylistList
             // 
+            this.palylistList.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.palylistList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.palylistList.Font = new System.Drawing.Font("Modern No. 20", 11.25F);
+            this.palylistList.ForeColor = System.Drawing.SystemColors.WindowText;
             this.palylistList.FormattingEnabled = true;
+            this.palylistList.ItemHeight = 17;
             this.palylistList.Location = new System.Drawing.Point(0, 0);
             this.palylistList.Name = "palylistList";
             this.palylistList.Size = new System.Drawing.Size(355, 184);
             this.palylistList.TabIndex = 2;
-            // 
-            // itemToSearch
-            // 
-            this.itemToSearch.Name = "itemToSearch";
-            this.itemToSearch.Size = new System.Drawing.Size(100, 23);
+            this.palylistList.SelectedIndexChanged += new System.EventHandler(this.palylistList_SelectedIndexChanged);
             // 
             // volumeButton
             // 
@@ -416,22 +438,6 @@
             this.playButton.TabIndex = 2;
             this.playButton.TabStop = false;
             // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Image = global::LaboratorioRepaso_Andoni_Zamora.Properties.Resources.Button_12_512;
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // buscarToolStripMenuItem
-            // 
-            this.buscarToolStripMenuItem.Image = global::LaboratorioRepaso_Andoni_Zamora.Properties.Resources._698627_icon_111_search_512;
-            this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
-            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(39, 23);
-            this.buscarToolStripMenuItem.Text = ":";
-            this.buscarToolStripMenuItem.Click += new System.EventHandler(this.buscarToolStripMenuItem_Click);
-            // 
             // panelResult
             // 
             this.panelResult.Controls.Add(this.button5);
@@ -451,15 +457,38 @@
             this.panelResult.Size = new System.Drawing.Size(353, 312);
             this.panelResult.TabIndex = 11;
             // 
-            // label6
+            // button5
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 52);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(110, 24);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Resultados";
+            this.button5.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(49, 248);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 30);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "A Playlist";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(139, 248);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 30);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "Reproducir";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Modern No. 20", 11.25F);
+            this.button3.Location = new System.Drawing.Point(231, 248);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 30);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Aceptar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // albumResult
             // 
@@ -537,37 +566,15 @@
             this.label10.TabIndex = 8;
             this.label10.Text = "Nombre";
             // 
-            // button3
+            // label6
             // 
-            this.button3.Font = new System.Drawing.Font("Modern No. 20", 11.25F);
-            this.button3.Location = new System.Drawing.Point(231, 248);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 30);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Aceptar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(139, 248);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 30);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "Reproducir";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(49, 248);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 30);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "A Playlist";
-            this.button5.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(18, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(110, 24);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Resultados";
             // 
             // Form1
             // 
