@@ -129,5 +129,8 @@
   <ItemGroup>
     <None Include="Resources\698627-icon-111-search-512.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_12-51r.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
