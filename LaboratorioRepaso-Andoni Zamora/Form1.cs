@@ -17,7 +17,7 @@ namespace LaboratorioRepaso_Andoni_Zamora
         Dictionary<string, ArchivoMusica> diccionarioPlaylist = new Dictionary<string, ArchivoMusica>();
         ArchivoMusica[] ordenada;
         ArchivoMusica resultadoDeBusqueda;
-        bool nombre = true, duracion = true;
+        bool nombre = true, duracion = true, play = false;
         string ruta;
         
 
@@ -27,6 +27,7 @@ namespace LaboratorioRepaso_Andoni_Zamora
             panelAgregar.Visible = false;
             playlistPanel.Visible = false;
             panelResult.Visible = false;
+            reproductor.Visible = false;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,7 +169,6 @@ namespace LaboratorioRepaso_Andoni_Zamora
                         diccionarioMusica.Add(file.nombreCancion, file);
                         songList.Items.Add(file.nombreCancion);
                     }
-                    reproductor.URL = archivos[0];
                 }
             }
             catch
@@ -211,6 +211,8 @@ namespace LaboratorioRepaso_Andoni_Zamora
         private void button4_Click(object sender, EventArgs e)
         {
             reproductor.URL = resultadoDeBusqueda.url;
+            songName.Text = resultadoDeBusqueda.nombreCancion + " - " + resultadoDeBusqueda.artista;
+            PlayMethod();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -230,9 +232,31 @@ namespace LaboratorioRepaso_Andoni_Zamora
             
         }
 
-        private void palylistList_SelectedIndexChanged(object sender, EventArgs e) => reproductor.URL = diccionarioPlaylist[palylistList.SelectedItem.ToString()].url;
-        private void songList_SelectedIndexChanged(object sender, EventArgs e) => reproductor.URL = diccionarioMusica[songList.SelectedItem.ToString()].url;
+        private void songList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string consulta = songList.SelectedItem.ToString();
+                File track = File.Create(diccionarioMusica[consulta].url);
+                reproductor.URL = diccionarioMusica[consulta].url;
+                songName.Text = consulta+" - "+diccionarioMusica[consulta].artista;
+                PlayMethod();
+            }
+            catch { }
 
+        }
+        private void palylistList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string consulta = palylistList.SelectedItem.ToString();
+                reproductor.URL = diccionarioMusica[consulta].url;
+                songName.Text = consulta + " - " + diccionarioMusica[consulta].artista;
+                PlayMethod();
+            }
+            catch { }
+            
+        }
         private void nombreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ALista();
@@ -288,6 +312,62 @@ namespace LaboratorioRepaso_Andoni_Zamora
             {
                 palylistList.Items.Add(ordenada[i].nombreCancion);
             }
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            switch (play)
+            {
+                case true:
+                    PlayMethod();
+                    break;
+                case false:
+                    reproductor.Ctlcontrols.pause();
+                    playButton.Image = Properties.Resources.Button_3_512;
+                    play = true;
+                    break;
+            }
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            reproductor.Ctlcontrols.stop();
+            playButton.Image = Properties.Resources.Button_3_512;
+            play = false;
+        }
+
+        public void PlayMethod()
+        {
+            reproductor.Ctlcontrols.play();
+            playButton.Image = Properties.Resources.Button_4_128;
+            play = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            SongStatus();
+            songStatus.Value = (int)reproductor.Ctlcontrols.currentPosition;
+            volumeStatus.Value = reproductor.settings.volume;
+        }
+
+        private void reproductor_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) => SongStatus();
+
+        private void volumeStatus_ValueChanged(object sender, EventArgs e) => reproductor.settings.volume = volumeStatus.Value;
+
+        public void SongStatus()
+        {
+            if(reproductor.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                songStatus.Maximum = (int)reproductor.Ctlcontrols.currentItem.duration;
+                timer1.Start();
+            }
+            else if(reproductor.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                timer1.Stop();
+                songStatus.Value = 0;
+            }
+            else if(reproductor.playState == WMPLib.WMPPlayState.wmppsPaused)
+                timer1.Stop();
         }
 
         public class ArchivoMusica
